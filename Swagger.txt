@@ -1,0 +1,38 @@
+Login:
+	-Crear Usuario 404,503
+	-Obtener Usuario 404,
+
+Home:404,505,List<Subastas>, Catalogo , List<ItemsCatalogo>
+	-Obtener Subastas Abiertas ItemsCatalogo, 404
+	
+	
+Usuario:404,503,505,Usuario,Notificaciones,List<Cheque>,List<CuentaBancaria>,List<Tarjeta>
+	-Obtener Usuario: 404, 503,505,Usuario
+			-Usuario, Correo, Métodos de Pago
+			-Modificar Usuario
+	-Obtener Notificaciones o Cantidad :503,Notificaciones
+	-Añadir Cheque Certificado Cheque
+	-Añadir Centa Bancaria CuentaBancaria
+	-Añadir Tarjeta de Crédito Tarjeta
+	
+Subasta:404, 505 Catalogo, List<ItemsCatalogo>, Productos, Subastas, Pujos
+	-Catalogo Catalogo, List<ItemsCatalogo>,Productos, 404 505
+	-Registro Subastas Subastas
+	-Registro Productos Productos
+	-Pujar Pujos
+	
+Duenios:	
+	-Mismo que personas
+Subastadores:
+	-Mismo que personas
+	
+Empleados:
+	-Sector
+	
+Clientes:
+	-Mismo que personas
+	-Obtener Categoría *chkCategoria check (categoria in ('comun', 'especial', 'plata', 'oro', 'platino'))*
+	-Verificador #Se usa para verificar al usuario, es int. Podemos hacer que vallga 1 o 0
+	
+
+	

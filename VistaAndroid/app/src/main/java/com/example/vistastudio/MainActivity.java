@@ -14,8 +14,8 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextInputEditText etEmail;
-    private TextInputEditText etPassword;
+    private TextInputEditText etUser;
+    private TextInputEditText etPass;
     private Button btnLogin;
 
     @Override
@@ -30,19 +30,18 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Inicializar vistas
-        etEmail = findViewById(R.id.etEmail);
-        etPassword = findViewById(R.id.etPassword);
+        // Inicializar vistas con los nuevos IDs coincidentes con el diseño de la imagen
+        etUser = findViewById(R.id.etUser);
+        etPass = findViewById(R.id.etPass);
         btnLogin = findViewById(R.id.btnLogin);
 
         btnLogin.setOnClickListener(v -> {
-            String email = etEmail.getText().toString();
-            String password = etPassword.getText().toString();
+            String user = etUser.getText().toString();
+            String pass = etPass.getText().toString();
 
-            if (email.isEmpty() || password.isEmpty()) {
+            if (user.isEmpty() || pass.isEmpty()) {
                 Toast.makeText(MainActivity.this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
             } else {
-                // Aquí iría la lógica de autenticación para la app de subastas
                 Toast.makeText(MainActivity.this, "Iniciando sesión...", Toast.LENGTH_SHORT).show();
             }
         });
