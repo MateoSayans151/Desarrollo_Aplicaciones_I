@@ -2,4 +2,14 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
+    <!-- Subasta App Colors -->
+    <color name="bg_dark">#051120</color>
+    <color name="gold_text">#C5A368</color>
+    <color name="input_bg">#0A1D33</color>
+    <color name="input_stroke">#3F536E</color>
+    <color name="button_gold_start">#E6C48A</color>
+    <color name="button_gold_end">#8E6E3A</color>
+
+    <!-- <color name="input_stroke">#tu_color_hex</color> -->
 </resources>
