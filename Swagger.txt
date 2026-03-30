@@ -6,8 +6,8 @@ Home:404,505,List<Subastas>, Catalogo , List<ItemsCatalogo>
 	-Obtener Subastas Abiertas ItemsCatalogo, 404
 	
 	
-Usuario:404,503,505,Usuario,Notificaciones,List<Cheque>,List<CuentaBancaria>,List<Tarjeta>
-	-Obtener Usuario: 404, 503,505,Usuario
+Usuario:404,503,500,200,Usuario,Notificaciones,List<Cheque>,List<CuentaBancaria>,List<Tarjeta>
+	-Obtener Usuario: 404, 503,500,200,Usuario
 			-Usuario, Correo, Métodos de Pago
 			-Modificar Usuario
 	-Obtener Notificaciones o Cantidad :503,Notificaciones
@@ -15,8 +15,8 @@ Usuario:404,503,505,Usuario,Notificaciones,List<Cheque>,List<CuentaBancaria>,Lis
 	-Añadir Centa Bancaria CuentaBancaria
 	-Añadir Tarjeta de Crédito Tarjeta
 	
-Subasta:404, 505 Catalogo, List<ItemsCatalogo>, Productos, Subastas, Pujos
-	-Catalogo Catalogo, List<ItemsCatalogo>,Productos, 404 505
+Subasta:404,200, 500 Catalogo, List<ItemsCatalogo>, Productos, Subastas, Pujos
+	-Catalogo Catalogo, List<ItemsCatalogo>,Productos, 404 500
 	-Registro Subastas Subastas
 	-Registro Productos Productos
 	-Pujar Pujos
