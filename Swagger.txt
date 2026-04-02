@@ -1,25 +1,30 @@
 Login:
-	-Crear Usuario 404,401
-	-Obtener Usuario 404,
-
-Home:404,505,List<Subastas>, Catalogo , List<ItemsCatalogo>
-	-Obtener Subastas Abiertas ItemsCatalogo, 404
+	-Crear Usuario 201, 404,401
+	-Obtener Usuario 200, 404
+	-Autenticar Usuario 200, 401
 	
+Home: 404,505,List<Subastas>, Catalogo, List<ItemsCatalogo>
+	-Obtener Subastas Abiertas 200 ItemsCatalogo, 404
+	-Obtener Catálogo Público 200 ItemsCatalogo
+	-Obtener Catálogo Detallado 200 ItemsCatalogo, 401
 	
-Usuario:404,401,500,200,Usuario,Notificaciones,List<Cheque>,List<CuentaBancaria>,List<Tarjeta>
-	-Obtener Usuario: 404, 401,500,200,Usuario
+Usuario: 404,401,500,200,Usuario,Notificaciones,List<Cheque>,List<CuentaBancaria>,List<Tarjeta>
+	-Obtener Usuario 200 Usuario, 404, 401
 			-Usuario, Correo, Métodos de Pago
 			-Modificar Usuario
-	-Obtener Notificaciones o Cantidad :401,Notificaciones
-	-Añadir Cheque Certificado Cheque
-	-Añadir Centa Bancaria CuentaBancaria
-	-Añadir Tarjeta de Crédito Tarjeta
+	-Obtener Notificaciones o Cantidad 200, Notificaciones, 401
+	-Obtener Historial 200 subastas
 	
-Subasta:404,200, 500 Catalogo, List<ItemsCatalogo>, Productos, Subastas, Pujos
-	-Catalogo Catalogo, List<ItemsCatalogo>,Productos, 404 500
-	-Registro Subastas Subastas
-	-Registro Productos Productos
-	-Pujar Pujos
+Metodos de pago: 200, 400, 401, 404
+	-Añadir Cheque Certificado Cheque 201, 400
+	-Añadir Cuenta Bancaria CuentaBancaria 201, 400
+	-Añadir Tarjeta de Crédito Tarjeta 201, 400
+	
+Subasta: 404, 200, 500 Catalogo, List<ItemsCatalogo>, Productos, Subastas, Pujos
+	-Catalogo 200 Catalogo, List<ItemsCatalogo>,Productos, 404 500
+	-Registro Subastas 200 Subastas
+	-Registro Productos 200 Productos
+	-Pujar 200 Pujos, 400, 403, 409
 	
 Duenios:	
 	-Mismo que personas
