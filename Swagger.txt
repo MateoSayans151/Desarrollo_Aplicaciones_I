@@ -40,4 +40,761 @@ Clientes:
 	-Verificador #Se usa para verificar al usuario, es int. Podemos hacer que vallga 1 o 0
 	
 
+https://editor.swagger.io/:
+
+openapi: 3.0.0
+info:
+  title: API de Subastas
+  version: 1.0.0
+  description: Especificación de endpoints del sistema de subastas
+
+servers:
+  - url: http://localhost:8080/api
+    description: Servidor local de desarrollo
+
+tags:
+  - name: Login
+  - name: Home
+  - name: Usuario
+  - name: Métodos de Pago
+  - name: Subasta
+  - name: Empleados
+  - name: Clientes
+
+paths:
+
+  # ──────────────────────────────
+  # LOGIN
+  # ──────────────────────────────
+
+  /auth/register:
+    post:
+      tags: [Login]
+      summary: Crear Usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsuarioRequest'
+      responses:
+        '201':
+          description: Usuario creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /auth/user/{id}:
+    get:
+      tags: [Login]
+      summary: Obtener Usuario
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: Usuario encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /auth/login:
+    post:
+      tags: [Login]
+      summary: Autenticar Usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Autenticación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  # ──────────────────────────────
+  # HOME
+  # ──────────────────────────────
+
+  /home/subastas:
+    get:
+      tags: [Home]
+      summary: Obtener Subastas Abiertas
+      responses:
+        '200':
+          description: Lista de items de subastas abiertas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ItemCatalogo'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '505':
+          $ref: '#/components/responses/ServerError'
+
+  /home/catalogo:
+    get:
+      tags: [Home]
+      summary: Obtener Catálogo Público
+      responses:
+        '200':
+          description: Items del catálogo público
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ItemCatalogo'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '505':
+          $ref: '#/components/responses/ServerError'
+
+  /home/catalogo/detallado:
+    get:
+      tags: [Home]
+      summary: Obtener Catálogo Detallado
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Items del catálogo detallado
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ItemCatalogo'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '505':
+          $ref: '#/components/responses/ServerError'
+
+  # ──────────────────────────────
+  # USUARIO
+  # ──────────────────────────────
+
+  /usuario/{id}:
+    get:
+      tags: [Usuario]
+      summary: Obtener Usuario
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: Datos del usuario (incluye correo y métodos de pago)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      tags: [Usuario]
+      summary: Modificar Usuario
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsuarioRequest'
+      responses:
+        '200':
+          description: Usuario modificado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /usuario/{id}/notificaciones:
+    get:
+      tags: [Usuario]
+      summary: Obtener Notificaciones o Cantidad
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+        - name: soloConteo
+          in: query
+          description: Si es true, devuelve solo la cantidad de notificaciones
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Notificaciones del usuario
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notificaciones'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /usuario/{id}/historial:
+    get:
+      tags: [Usuario]
+      summary: Obtener Historial de Subastas
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: Historial de subastas del usuario
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subasta'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # ──────────────────────────────
+  # MÉTODOS DE PAGO
+  # ──────────────────────────────
+
+  /pagos/cheque:
+    post:
+      tags: [Métodos de Pago]
+      summary: Añadir Cheque Certificado
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cheque'
+      responses:
+        '201':
+          description: Cheque añadido exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cheque'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /pagos/cuenta-bancaria:
+    post:
+      tags: [Métodos de Pago]
+      summary: Añadir Cuenta Bancaria
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CuentaBancaria'
+      responses:
+        '201':
+          description: Cuenta bancaria añadida exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CuentaBancaria'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /pagos/tarjeta:
+    post:
+      tags: [Métodos de Pago]
+      summary: Añadir Tarjeta de Crédito
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tarjeta'
+      responses:
+        '201':
+          description: Tarjeta añadida exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tarjeta'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  # ──────────────────────────────
+  # SUBASTA
+  # ──────────────────────────────
+
+  /subasta/catalogo:
+    get:
+      tags: [Subasta]
+      summary: Obtener Catálogo de Subasta
+      responses:
+        '200':
+          description: Catálogo con items y productos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Catalogo'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /subasta/registro:
+    post:
+      tags: [Subasta]
+      summary: Registro de Subasta
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subasta'
+      responses:
+        '200':
+          description: Subasta registrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subasta'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /subasta/registro/producto:
+    post:
+      tags: [Subasta]
+      summary: Registro de Producto en Subasta
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Producto'
+      responses:
+        '200':
+          description: Producto registrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Producto'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /subasta/{id}/pujar:
+    post:
+      tags: [Subasta]
+      summary: Pujar en Subasta
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pujo'
+      responses:
+        '200':
+          description: Puja registrada exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pujo'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+
+  # ──────────────────────────────
+  # CLIENTES
+  # ──────────────────────────────
+
+  /cliente/{id}/categoria:
+    get:
+      tags: [Clientes]
+      summary: Obtener Categoría del Cliente
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: Categoría del cliente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  categoria:
+                    type: string
+                    enum: [comun, especial, plata, oro, platino]
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /cliente/{id}/verificar:
+    get:
+      tags: [Clientes]
+      summary: Verificar Cliente
+      description: Verifica al usuario. Retorna 1 (verificado) o 0 (no verificado).
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: Estado de verificación
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  verificado:
+                    type: integer
+                    enum: [0, 1]
+                    example: 1
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # ──────────────────────────────
+  # EMPLEADOS
+  # ──────────────────────────────
+
+  /empleado/{id}/sector:
+    get:
+      tags: [Empleados]
+      summary: Obtener Sector del Empleado
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: Sector del empleado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sector:
+                    type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+# ──────────────────────────────────────────────
+# COMPONENTS
+# ──────────────────────────────────────────────
+
+components:
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    IdPath:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+
+  responses:
+    BadRequest:
+      description: Solicitud inválida
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: No autorizado
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Acceso prohibido
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Recurso no encontrado
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Conflict:
+      description: Conflicto con el estado actual del recurso
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: Error interno del servidor
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+  schemas:
+
+    Error:
+      type: object
+      properties:
+        codigo:
+          type: integer
+        mensaje:
+          type: string
+
+    LoginRequest:
+      type: object
+      required: [correo, password]
+      properties:
+        correo:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+
+    TokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        tipo:
+          type: string
+          example: Bearer
+
+    UsuarioRequest:
+      type: object
+      properties:
+        nombre:
+          type: string
+        correo:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+
+    Usuario:
+      type: object
+      properties:
+        id:
+          type: integer
+        nombre:
+          type: string
+        correo:
+          type: string
+          format: email
+        metodosDePago:
+          type: object
+          properties:
+            cheques:
+              type: array
+              items:
+                $ref: '#/components/schemas/Cheque'
+            cuentasBancarias:
+              type: array
+              items:
+                $ref: '#/components/schemas/CuentaBancaria'
+            tarjetas:
+              type: array
+              items:
+                $ref: '#/components/schemas/Tarjeta'
+
+    Notificaciones:
+      type: object
+      properties:
+        cantidad:
+          type: integer
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              mensaje:
+                type: string
+              leida:
+                type: boolean
+              fecha:
+                type: string
+                format: date-time
+
+    Cheque:
+      type: object
+      properties:
+        id:
+          type: integer
+        numero:
+          type: string
+        banco:
+          type: string
+        monto:
+          type: number
+          format: float
+
+    CuentaBancaria:
+      type: object
+      properties:
+        id:
+          type: integer
+        cbu:
+          type: string
+        banco:
+          type: string
+        titular:
+          type: string
+
+    Tarjeta:
+      type: object
+      properties:
+        id:
+          type: integer
+        numero:
+          type: string
+        titular:
+          type: string
+        vencimiento:
+          type: string
+          example: "12/27"
+
+    ItemCatalogo:
+      type: object
+      properties:
+        id:
+          type: integer
+        nombre:
+          type: string
+        descripcion:
+          type: string
+        precioBase:
+          type: number
+          format: float
+        imagenUrl:
+          type: string
+
+    Catalogo:
+      type: object
+      properties:
+        id:
+          type: integer
+        nombre:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemCatalogo'
+
+    Subasta:
+      type: object
+      properties:
+        id:
+          type: integer
+        nombre:
+          type: string
+        fechaInicio:
+          type: string
+          format: date-time
+        fechaCierre:
+          type: string
+          format: date-time
+        estado:
+          type: string
+          enum: [abierta, cerrada, pendiente]
+        catalogo:
+          $ref: '#/components/schemas/Catalogo'
+
+    Producto:
+      type: object
+      properties:
+        id:
+          type: integer
+        nombre:
+          type: string
+        descripcion:
+          type: string
+        precioBase:
+          type: number
+          format: float
+
+    Pujo:
+      type: object
+      properties:
+        id:
+          type: integer
+        monto:
+          type: number
+          format: float
+        usuarioId:
+          type: integer
+        subastaId:
+          type: integer
+        fecha:
+          type: string
+          format: date-time
+
 	
