@@ -14,7 +14,7 @@
         android:layout_marginTop="16dp"
         android:text="SUBASTA APP"
         android:textColor="@color/gold_text"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,32 +37,34 @@
             android:gravity="center"
             android:orientation="vertical">
             <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
                 android:padding="2dp"
                 app:shapeAppearanceOverlay="@style/CircleImage"
-                android:src="@tools:sample/avatars"
+                android:src="@drawable/user_avatar"
                 app:strokeColor="@color/gold_text"
                 app:strokeWidth="2dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CATEGORIA: ORO"
+                android:layout_marginTop="4dp"
+                android:text="CATEGORIA: PLATA"
                 android:textColor="@color/gold_text"
-                android:textSize="10sp" />
+                android:textSize="10sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@drawable/exp_border_8">
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
                 android:layout_gravity="center"
-                android:background="@drawable/circle_gold_border"
                 android:padding="20dp"
-                android:src="@android:drawable/btn_star_big_on" />
+                android:src="@drawable/silver_star" />
         </FrameLayout>
 
         <LinearLayout
@@ -75,27 +77,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@android:drawable/ic_popup_reminder"
-                    app:tint="@color/gold_text" />
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/ic_notification_bell" />
                 <TextView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:layout_gravity="end|top"
-                    android:background="@drawable/circle_gold_border"
+                    android:background="@drawable/ic_star_gold"
                     android:backgroundTint="#8E6E3A"
                     android:gravity="center"
                     android:text="3"
                     android:textColor="@color/white"
-                    android:textSize="10sp" />
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
             </FrameLayout>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:text="NOTIFICACIONES"
                 android:textColor="@color/gold_text"
-                android:textSize="10sp" />
+                android:textSize="10sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 
@@ -104,10 +108,10 @@
         android:id="@+id/clDestacados"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/card_destacados_bg"
-        android:padding="16dp"
+        android:padding="12dp"
         app:layout_constraintTop_toBottomOf="@id/llTopIcons">
 
         <TextView
@@ -116,6 +120,7 @@
             android:layout_height="wrap_content"
             android:text="DESTACADOS DE LA SEMANA"
             android:textColor="@color/gold_text"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -124,22 +129,23 @@
         <LinearLayout
             android:id="@+id/llItems"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginTop="16dp"
+            android:layout_height="90dp"
+            android:layout_marginTop="12dp"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@id/tvDestacadosTitle">
-            <View android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="4dp" android:background="@drawable/card_auction_bg" />
-            <View android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="4dp" android:background="@drawable/card_auction_bg" />
-            <View android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="4dp" android:background="@drawable/card_auction_bg" />
+            <View android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="6dp" android:background="@drawable/card_auction_bg" />
+            <View android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="6dp" android:background="@drawable/card_auction_bg" />
+            <View android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="6dp" android:background="@drawable/card_auction_bg" />
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="16dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/button_gradient"
             android:text="VER SUBASTAS"
             android:textColor="@color/black"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/llItems" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -148,10 +154,10 @@
         android:id="@+id/tvAbiertas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:text="SUBASTAS ABIERTAS"
         android:textColor="@color/gold_text"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -162,16 +168,16 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@id/bnvMain"
+        app:layout_constraintBottom_toTopOf="@id/bnvContainer"
         app:layout_constraintTop_toBottomOf="@id/tvAbiertas">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingHorizontal="24dp">
+            android:paddingHorizontal="20dp">
 
-            <!-- Item de subasta -->
+            <!-- Item 1: Arte -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -180,38 +186,49 @@
                 android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/tvAuctionName"
+                    android:id="@+id/tvAuctionName1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="SUBASTA INTERNACIONAL DE ARTE >"
                     android:textColor="@color/white"
-                    android:textSize="12sp"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/tvLive1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:text="● Live $USD"
+                    android:textColor="#BDC3C7"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvAuctionName1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:text="MAYOR OFERTA: $550,000\n10 MINUTOS RESTANTES"
                     android:textColor="#BDC3C7"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvAuctionName" />
+                    app:layout_constraintTop_toBottomOf="@id/tvAuctionName1" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="80dp"
+                    android:layout_width="85dp"
                     android:layout_height="35dp"
                     android:background="@drawable/button_gradient"
                     android:text="ENTRAR"
                     android:textColor="@color/black"
-                    android:textSize="10sp"
+                    android:textSize="11sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Otro Item -->
+            <!-- Item 2: Relojes -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -225,27 +242,69 @@
                     android:layout_height="wrap_content"
                     android:text="SUBASTA COLECCIONISTA RELOJES >"
                     android:textColor="@color/white"
-                    android:textSize="12sp"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/tvLive2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:text="● Live $ARG"
+                    android:textColor="#BDC3C7"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvAuctionName2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:text="MAYOR OFERTA: $215,300\n1 HORA RESTANTE"
                     android:textColor="#BDC3C7"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvAuctionName2" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="80dp"
+                    android:layout_width="85dp"
                     android:layout_height="35dp"
                     android:background="@drawable/button_gradient"
                     android:text="ENTRAR"
                     android:textColor="@color/black"
-                    android:textSize="10sp"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Item 3: Cuadros -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/card_auction_bg"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvAuctionName3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SUBASTA CUADROS DE ARTE >"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="85dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/button_gradient"
+                    android:text="ENTRAR"
+                    android:textColor="@color/black"
+                    android:textSize="11sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
@@ -254,31 +313,74 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Bottom Navigation Mockup -->
+    <!-- Bottom Navigation -->
     <LinearLayout
+        android:id="@+id/bnvContainer"
         android:layout_width="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#FFFFFF"
-        >
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white" />
+
         <LinearLayout
             android:id="@+id/bnvMain"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="70dp"
             android:background="#051120"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_marginTop="1dp"
-            >
-            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="HOME" android:textColor="@color/white" android:textSize="10sp" />
-            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="PRODUCTOS" android:textColor="@color/white" android:textSize="10sp" />
-            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="PUJAS" android:textColor="@color/white" android:textSize="10sp" />
-            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="MI PERFIL" android:textColor="@color/white" android:textSize="10sp" />
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <View android:layout_width="24dp" android:layout_height="24dp" android:background="@drawable/exp_border_2" android:backgroundTint="#BDC3C7" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="HOME" android:textColor="@color/white" android:textSize="10sp" android:layout_marginTop="4dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <FrameLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+                    <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@android:drawable/ic_dialog_dialer" app:tint="@color/white" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="12" android:textColor="@color/white" android:textSize="8sp" android:layout_gravity="end|top" />
+                </FrameLayout>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="PRODUCTOS" android:textColor="@color/white" android:textSize="10sp" android:layout_marginTop="4dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <FrameLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+                    <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@android:drawable/ic_menu_agenda" app:tint="@color/white" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="3" android:textColor="@color/white" android:textSize="8sp" android:layout_gravity="end|top" />
+                </FrameLayout>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="PUJAS" android:textColor="@color/white" android:textSize="10sp" android:layout_marginTop="4dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@android:drawable/ic_menu_info_details" app:tint="@color/white" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="MI PERFIL" android:textColor="@color/white" android:textSize="10sp" android:layout_marginTop="4dp" />
+            </LinearLayout>
+
         </LinearLayout>
-
     </LinearLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

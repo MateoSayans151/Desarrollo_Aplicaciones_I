@@ -1,5 +1,6 @@
 package com.example.vistastudio;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
@@ -38,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(v -> {
             String user = etUser.getText().toString();
             String pass = etPass.getText().toString();
+            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish(); // Cierra el login para que no se pueda volver atrás con el botón retroceso
 
             if (user.isEmpty() || pass.isEmpty()) {
                 Toast.makeText(MainActivity.this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();

@@ -10,6 +10,7 @@
     <color name="input_stroke">#3F536E</color>
     <color name="button_gold_start">#E6C48A</color>
     <color name="button_gold_end">#8E6E3A</color>
+    <color name="text_secondary">#BDC3C7</color>
 
     <!-- <color name="input_stroke">#tu_color_hex</color> -->
 </resources>
