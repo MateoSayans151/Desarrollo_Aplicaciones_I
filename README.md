@@ -5,6 +5,8 @@ Aplicación móvil para participar en subastas en tiempo real y gestionar artíc
 
 Este proyecto fue desarrollado como **Trabajo Práctico Obligatorio de Desarrollo de Aplicaciones I**. La aplicación permite a los usuarios registrarse, participar en subastas dinámicas, ofertar por artículos y proponer bienes propios para ser subastados.
 
+
+URL al Prototipado (Figma): https://www.figma.com/design/3I2GpErUcZisvdbp6480uy/Subasta---App?node-id=0-1&t=u73vXLMP6eQmD4cC-1
 ---
 
 ## 📌 Descripción del Proyecto
